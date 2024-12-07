@@ -324,7 +324,7 @@ class VitInference:
         img_input = torch.from_numpy(img_input).to(torch.device(self.device))
 
         # Feed to model
-        heatmaps = self._vit_pose(img_input).detach().cpu().numpy()
+        heatmaps = self._vit_pose(img_input).to(torch.float32).detach().cpu().numpy()
         return self.postprocess(heatmaps, org_w, org_h)
 
     def _inference_onnx(self, img: np.ndarray) -> np.ndarray:
